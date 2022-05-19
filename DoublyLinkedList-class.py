@@ -1,5 +1,5 @@
 ############################Doubly Linked List############################
-class Node: #노드 클래스는 데이터 객체와 비어있는 다음값 객체로 주어짐
+class Node: #DLL에서 노드 클래스는 데이터 객체와 비어있는 이전 객체, 비어있는 다음값 객체로 주어짐
     def __init__(self, data, prev=None, next = None):
         self.data = data
         self.prev = prev
