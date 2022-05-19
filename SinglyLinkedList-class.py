@@ -1,14 +1,14 @@
-########################Singly Linked List########################
+############################Singly Linked List############################
 class Node: #노드 클래스는 데이터 객체와 비어있는 다음값 객체로 주어짐
     def __init__(self, data, next = None):
         self.data = data
         self.next = next
 
 class SinglyLinkedList:
-    def __init__(self, data='LinkedList'):
+    def __init__(self, data='LinkedList'): #기준 머리를 잡아준다(불변)
         self.headdummyNode = Node(data)
 
-    def AddTail(self, data): #headdummyNode에 헤드노드가 들어감! 
+    def AddTail(self, data): #headdummyNode에 불변의 노드가 들어가 있음 
         node = self.headdummyNode
         while node.next != None: #None이 아닐때까지 하나씩 반복하면서 확인 #while node.next로 써도되나 개념공부를 위해
             node = node.next #node.next가 None이아니면 하나 넘김!
@@ -28,9 +28,9 @@ class SinglyLinkedList:
         node = self.headdummyNode
         while node.next != None: #순회
             if node.data == prevdata: #삽입할 위치의 이전 노드를 찾으면.
-                temp = Node(data) #삽입 데이터의 노드를 temp로 생성.
-                temp.next = node.next #삽입위치 이전 노드가 가리키던 next는, 삽입 데이터 노드의 next가 됨.
-                node.next = temp #삽입위치 이전 노드가 가리키는 next는, 삽입 데이터 노드가 됨.
+                ins_node = Node(data) #삽입 데이터의 노드를 ins_node로 생성.
+                ins_node.next = node.next #삽입위치 이전 노드가 가리키던 next는, 삽입 데이터 노드의 next가 됨.
+                node.next = ins_node #삽입위치 이전 노드가 가리키는 next는, 삽입 데이터 노드가 됨.
                 break        
             node = node.next #못찾으면 다음 노드로 넘어감
 
@@ -59,7 +59,7 @@ class SinglyLinkedList:
             print('Find!!!', node.data)
             print('Find!!!, Index:', idx)
             switch = 1
-            
+
         if switch == 0:
             print('찾는값 없음')
 
@@ -73,7 +73,7 @@ SLL.AddTail(1212)
 SLL.InsertNode(5, 100)
 SLL.AddHead(33)
 SLL.AddHead(51)
-SLL.DeleteNode(6)
+
 
 node = SLL.headdummyNode
 while node.next != None:
