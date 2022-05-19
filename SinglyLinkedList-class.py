@@ -17,7 +17,8 @@ class SinglyLinkedList:
         ########근데 tail을 시작할때 정해놓으면 위와같은 while문을 돌필요가없을듯########
 
     #Node의 data변수엔 data를넣어주고 next 객체변수에 다음 Node클래스를 연결해주는것이 핵심
-    def AddHead(self, data): #무조건 이전 노드보다 앞에다 넣어줘야함
+    #기본적으로 존재하는 더미 노드 뒤에다 넣어줌
+    def AddHead(self, data): 
         newhead = Node(data)
         newhead.next = self.headdummyNode.next
         self.headdummyNode.next = newhead
@@ -42,17 +43,18 @@ class SinglyLinkedList:
                 node.next = node.next.next
             node = node.next
 
-p=SinglyLinkedList('시작점')
-p.AddTail(5)
-p.AddTail(6)
-p.AddTail(2312)
-p.AddTail(1212)
-p.InsertNode(5, 100)
-p.AddHead(33)
-p.AddHead(51)
-p.DeleteNode(6)
+SLL=SinglyLinkedList('시작점')
+SLL.AddTail(5)
+SLL.AddTail(6)
+SLL.AddTail(2312)
+SLL.AddTail(1212)
+SLL.InsertNode(5, 100)
+SLL.AddHead(33)
+SLL.AddHead(51)
+SLL.DeleteNode(6)
+
 #출력 시험
-node = p.headdummyNode
+node = SLL.headdummyNode
 while node.next != None:
     print(node.data)
     node = node.next
