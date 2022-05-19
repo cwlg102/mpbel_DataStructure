@@ -5,7 +5,7 @@ class Node: #노드 클래스는 데이터 객체와 비어있는 다음값 객�
         self.next = next
 
 class SinglyLinkedList:
-    def __init__(self, data):
+    def __init__(self, data='LinkedList'):
         self.headdummyNode = Node(data)
 
     def AddTail(self, data): #headdummyNode에 헤드노드가 들어감! 
@@ -42,8 +42,30 @@ class SinglyLinkedList:
                 #node.next.data하면 다음노드에 있는 데이터임
                 node.next = node.next.next
             node = node.next
+    
+    def SearchNode(self, data):
+        idx = -1
+        node = self.headdummyNode
+        switch = 0
+        while node.next != None:
+            if node.data == data:
+                print('Find!!!', node.data)
+                print('Find!!!, Index:', idx) 
+            node = node.next
+            idx += 1
+            switch = 1
 
-SLL=SinglyLinkedList('시작점')
+        if node.data == data:
+            print('Find!!!', node.data)
+            print('Find!!!, Index:', idx)
+            switch = 1
+            
+        if switch == 0:
+            print('찾는값 없음')
+
+
+#진짜 되는지 시험ㅋㅋ
+SLL=SinglyLinkedList()
 SLL.AddTail(5)
 SLL.AddTail(6)
 SLL.AddTail(2312)
@@ -53,12 +75,10 @@ SLL.AddHead(33)
 SLL.AddHead(51)
 SLL.DeleteNode(6)
 
-#출력 시험
 node = SLL.headdummyNode
 while node.next != None:
     print(node.data)
     node = node.next
 print(node.data)
 
-
-
+SLL.SearchNode(5)
