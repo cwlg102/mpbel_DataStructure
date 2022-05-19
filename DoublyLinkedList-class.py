@@ -11,6 +11,7 @@ class DoublyLinkedList:
         self.taildummyNode = Node(data)
         self.headdummyNode.next = self.taildummyNode
         self.taildummyNode.prev = self.headdummyNode
+        self.num = 0 #Add, Insert 할 때 +1, Delete 할 때 -1
 
     def AddTail(self, data):  
         tailnode = Node(data)
@@ -18,6 +19,7 @@ class DoublyLinkedList:
         tailnode.next = self.taildummyNode #(끝에 넣고자하는 노드)의 next를 (꼬리 더미 노드)를 가리키게 함
         self.taildummyNode.prev.next = tailnode #(꼬리 더미 노드의 전에있던) 노드의 next를 (끝에 넣고자하는 노드)를 가리키게 함
         self.taildummyNode.prev = tailnode #(꼬리 더미 노드)의 prev를 (끝에 넣고자하는 노드)를 가리키게 함
+        self.num += 1
 
     def AddHead(self, data): 
         headnode = Node(data)
@@ -25,6 +27,7 @@ class DoublyLinkedList:
         headnode.prev = self.headdummyNode #(앞에 넣고자하는 노드)의 prev를 (머리 더미 노드)를 가리키게 함
         self.headdummyNode.next.prev = headnode #(머리 더미 노드 후에 있던) 노드의 prev를 (앞에 넣고자하는 노드)를 가리키게 함
         self.headdummyNode.next = headnode #(머리 더미 노드)의 next를 (앞에 넣고자하는 노드)를 가리키게 함
+        self.num += 1
 
     def InsertNode(self, pivotdata, data):
         ins_node = Node(data)
@@ -39,6 +42,7 @@ class DoublyLinkedList:
                 ins_node.next = n_node.next
                 n_node.next.prev = ins_node
                 n_node.next = ins_node
+                self.num += 1
                 break
             
             if p_node.data == pivotdata:
@@ -46,6 +50,7 @@ class DoublyLinkedList:
                 ins_node.next = p_node.next
                 p_node.next.prev = ins_node
                 p_node.next = ins_node
+                self.num += 1
                 break
     
             n_node = n_node.next
@@ -61,14 +66,39 @@ class DoublyLinkedList:
             if n_node.data == deldata: #deldata를 먼저 발견한 쪽에서 삭제
                 n_node.prev.next = n_node.next 
                 n_node.next.prev = n_node.prev
+                self.num -= 1
                 break
             if p_node.data == deldata:
                 p_node.prev.next = p_node.next
                 p_node.next.prev = p_node.prev
+                self.num -= 1
                 break
 
             n_node = n_node.next
             p_node = p_node.prev
+
+    def SearchNode(self, srcdata):
+        n_node = self.headdummyNode
+        p_node = self.taildummyNode
+        idx = -1
+        switch = 0
+        while n_node.next != None and p_node.prev != None:
+            idx += 1
+            if n_node.data == srcdata:
+                print('Find!!!:', idx-1)
+                switch = 1
+                break
+
+            if p_node.data == srcdata:
+                print('Find!!!:', self.num - idx)
+                switch = 1
+                break
+            
+            n_node = n_node.next
+            p_node = p_node.prev
+        if switch == 0:
+            print('찾는 값 없음')
+        
 
 
 
@@ -86,3 +116,5 @@ while node.next:
     print(node.data)
     node = node.next
 print(node.data)
+
+dll.SearchNode('ㅇ')
