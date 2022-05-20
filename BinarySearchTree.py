@@ -51,19 +51,15 @@ class BinaryTree:
         if node.nodestatus == 0:
             print(node.data) #방문 안했을시 출력
             node.nodestatus = 1 #방문 처리
-            if node.left != None: #왼쪽자식이 비어있지 않으면 재귀적으로
+            if node.left != None: #왼쪽자식이 비어있지 않으면 재귀적으로 들어감
                 self.PreOrder(node.left)
     
-            if node.right != None: #오른쪽자식이 비어있지 않으면 재귀적으로
+            if node.right != None: #오른쪽자식이 비어있지 않으면 재귀적으로 들어감
                 self.PreOrder(node.right)    
         else:
             pass
             
-        
-        
-            
-
-            
+                   
 bst = BinaryTree(45)
 bst.Insert(15)
 bst.Insert(46)
