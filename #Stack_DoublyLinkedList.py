@@ -1,5 +1,5 @@
 #Stack_DoublyLinkedList
-import time
+#import time
 ############################Doubly Linked List############################
 class Node: #노드 클래스는 데이터 객체와 비어있는 다음값 객체로 주어짐
     def __init__(self, data, next = None):
@@ -108,7 +108,7 @@ class DoublyLinkedList:
 #taildummyNode를 가진 DoublyLinkedList로 구현.
 class Stack:
     def __init__(self, totalsize = 10):
-        self.dllstack = DoublyLinkedList()
+        self.dllstack = DoublyLinkedList() #dllstack을 매개변수로 선언
         self.totalsize = totalsize
         self.size = -1
 
@@ -143,16 +143,21 @@ class Stack:
             print(n_node.data)
             n_node = n_node.next
 
-start = time.time()
 #구현결과 시험
 stlist = Stack()
-for i in range(100000):
+#start = time.time()
+for i in range(12):
     stlist.Push(i)
+#print('time:', time.time()-start)
+stlist.Top()
+print()
+stlist.Show()
+print()
+stlist.Pop()
+stlist.Top()
+print()
+stlist.Show()
+print()
 
-print("time :", time.time() - start)
-#stlist.Show()
-#stlist.Pop()
-#stlist.Show()
-#print()
-#stlist.PopAll()
-#stlist.isEmpty()
+stlist.PopAll()
+stlist.isEmpty()
