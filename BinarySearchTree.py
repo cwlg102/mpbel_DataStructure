@@ -47,29 +47,15 @@ class BinaryTree:
                 else:
                     break
 
-    def Search(self, srcdata):
-        node = self.root
-        switch = 0
-        while node.left != None or node.right != None:
-            if srcdata < node.data:
-                node = node.left
-            elif srcdata > node.data:
-                node = node.right
-            else:
-                print('Find')
-                switch = 1
-                break  
-
     def PreOrder(self, node):
         if node.nodestatus == 0:
-            print(node.data)
-            node.nodestatus = 1
-            if node.left != None:
+            print(node.data) #방문 안했을시 출력
+            node.nodestatus = 1 #방문 처리
+            if node.left != None: #왼쪽자식이 비어있지 않으면 재귀적으로
                 self.PreOrder(node.left)
     
-            if node.right != None:
-                self.PreOrder(node.right)
-            
+            if node.right != None: #오른쪽자식이 비어있지 않으면 재귀적으로
+                self.PreOrder(node.right)    
         else:
             pass
             
