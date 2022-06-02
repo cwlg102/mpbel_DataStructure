@@ -1,4 +1,5 @@
 #Graph_SinglyLinkedList
+from collections import deque
 class Node: #노드 클래스는 데이터 객체와 비어있는 다음값 객체로 주어짐
     def __init__(self, data, next = None):
         self.data = data
@@ -68,8 +69,11 @@ class SinglyLinkedList:
     
     def ShowList(self): #리스트 보여주기용
         node = self.headnode
+        cnt = 0 
         while node.next != None:
-            print(node.data, end=' ')
+            if cnt == 0: print('vertex:',node.data,'/ 다음과 연결됨:', end=' ')
+            else:print(node.data, end=' ')
+            cnt += 1
             node = node.next
         print(node.data)
     
@@ -124,7 +128,7 @@ class Graph:
                     if node.data == v2:
                         return
                     else:
-                        v.headnode.AddTail(v2) #node.next = Node(v2)이런식으로 해도됨
+                        node.next = Node(v2) 
                 if v.headnode.data == v2:
                     node = v.headnode.next
                     while node.next:
@@ -134,7 +138,7 @@ class Graph:
                     if node.data == v1:
                         return
                     else:
-                        v.headnode.AddTail(v1)
+                        node.next = Node(v1)
     def deleteVer(self, delver):
         for v in self.vertex:
             if v.headnode.data == delver:
@@ -149,7 +153,8 @@ class Graph:
         for v in self.vertex:
             v.ShowList()
     
-    def DFS(self, data, visited = []):
+    def DFS(self, data, visited = [],flag = 0):
+        if flag == 0:print('DFS 수행')
         for v in self.vertex: #self.vertex리스트를 하나씩 검사
             if len(visited) == len(self.vertex):
                 return #재귀의 종료조건
@@ -159,10 +164,30 @@ class Graph:
                 node = v.headnode.next #다음 노드부터 돌림
                 while node.next: 
                     if node.data not in visited: #만약 LinkedList에 방문하지 않은 값이 있다면
-                        self.DFS(node.data, visited) #DFS를 수행
+                        self.DFS(node.data, visited,1) #DFS를 수행
                     node = node.next #그다음 노드로 넘어가기
                 if node.data not in visited:
-                    self.DFS(node.data, visited)
+                    self.DFS(node.data, visited,1)
+    
+    def BFS(self, data, visited=[]):
+        print('BFS 수행')
+        queue = deque()
+        queue.append(data) #queue에 시작할 data를 넣기
+        while queue:
+            dt = queue.popleft()#판단할 data 큐에서 뽑기
+            for v in self.vertex: #for문으로 맞는 headnode(vertex)찾아가기
+                if v.headnode.data == dt and dt not in visited: #만약 찾아간 headnode가 방문이 안된거라면
+                    visited.append(v.headnode.data) #방문 처리후
+                    print(v.headnode.data) #출력하고
+                    node = v.headnode #그 LinkedList에서 하나씩 돌기 시작
+                    while node.next: #돌면서
+                        if node.data not in visited:
+                            queue.append(node.data)
+                             #queue에 연결된 vertex data들을 다 넣음
+                        node= node.next #넘기고
+                    queue.append(node.data) #마지막값까지
+                
+
                         
             
 
@@ -188,8 +213,11 @@ a.addVer(5, 10)
 a.addVer(10, 11)
 a.addVer(5, 6)
 a.addVer(6, 8)
-a.deleteVer(6)
+a.addVer(3, 11)
+#a.deleteVer(6)
 print()
 a.Visualization()
 print()
 a.DFS(5)
+print()
+a.BFS(1)
