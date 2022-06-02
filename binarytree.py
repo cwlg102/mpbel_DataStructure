@@ -28,13 +28,13 @@ class BinaryTree:
         return node
 
     #직접 자신을 체크하며
-    def PreOrder(self, node):
+    def PreOrderDFS(self, node):
         if node == None:
             return 
         else:
             print(node.data)
-            self.PreOrder(node.left)
-            self.PreOrder(node.right)
+            self.PreOrderDFS(node.left)
+            self.PreOrderDFS(node.right)
 
     #자식 노드를 확인하며        
     def BFS(self, root):
@@ -87,18 +87,6 @@ class BinaryTree:
             self.Visualization(node.left)
             self.Visualization(node.right)
 
-    def VisualizationBFS(self):
-        queue = deque()
-        queue.append(self.root)
-        while queue:
-            node = queue.popleft()
-            if node.left:
-                queue.append(node.left)
-            if node.right:
-                queue.append(node.right)
-            
-        
-                  
 
 start = time.time()           
 b = BinaryTree(45)
@@ -117,7 +105,7 @@ b.Insert(b.root, 1)
 b.Insert(b.root, 22)
 b.Insert(b.root, -2)
 b.Insert(b.root, 5)
-b.PreOrder(b.root)
+b.PreOrderDFS(b.root)
 b.Visualization(b.root)
 print()
 b.BFS(b.root)
